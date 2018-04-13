@@ -1,5 +1,5 @@
 <view class="container">
-  <image class='imageClass' src="https://picsum.photos/400/800/"></image>
+  <!-- <image class='imageClass' src="https://picsum.photos/400/800/"></image> -->
   <view class="header">
     <view class="header-top">
       <view id="city">{{weather.city.admin_area}}-{{weather.city.parent_city}}-{{weather.city.location}}</view>
@@ -162,14 +162,14 @@
     </view>
   </view>
   <view class='sunriseComp'>
-    <image class='sunriseImg' src='/resources/sunrise.png'></image>
+    <image class='sunriseImg' src='/resources/sunrise.svg'></image>
     <view class='sunrise' title='日出时间'>{{weather.daily[0].astro.sr}}</view>
-    <image class='sunriseImg' src='/resources/sunset.png'></image>
+    <image class='sunriseImg' src='/resources/sunset.svg'></image>
     <view class='sunrise'>{{weather.daily[0].astro.ss}}</view>
     <view style='display:flex;margin-left:50rpx;'>
-    <image class='windImage' src='/resources/pres.png'></image>
+    <image class='windImage' src='/resources/pres.svg'></image>
     <view class='sunrise'>{{weather.now.pres}}hpa</view>
-    <image class='windImage' src='/resources/windspeed.png'></image>
+    <image class='windImage' src='/resources/windspeed.svg'></image>
     <view class='sunrise'>{{weather.now.wind.dir}}{{weather.now.wind.sc}}级</view>
     </view>
     
