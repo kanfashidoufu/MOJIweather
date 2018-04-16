@@ -44,10 +44,10 @@
 
 .header-condition {
   padding-bottom: 150rpx;
-  padding-left: 100rpx;
-  padding-right: 260rpx;
+  /* padding-left: 100rpx;
+  padding-right: 260rpx; */
   display: flex;
-  align-self: flex-end;
+  /* align-self: flex-end; */
   align-items: center;
   flex-direction: column;
   justify-content: flex-end;
