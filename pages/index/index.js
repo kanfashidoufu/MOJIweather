@@ -5,7 +5,7 @@ Page({
   data: {
     motto: '欢迎使用磨叽天气',
     more: '更多功能敬请期待',
-    ver: '1.0.5beta',
+    ver: '1.0.6beta',
     userInfo: {}
   },
   //事件处理函数
