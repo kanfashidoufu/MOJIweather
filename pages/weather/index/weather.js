@@ -18,10 +18,6 @@ function refreshData(that) {
   });
 }
 
-function subDate(value) {
-  return value.substring(5, 9);
-}
-
 Page({
   data: {
     title: 'MOJI天气',

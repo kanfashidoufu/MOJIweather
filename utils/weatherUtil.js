@@ -21,25 +21,22 @@ function requestWeatherByLocation(latitude, longitude, callback) {
               // header: {},
               method: 'GET',
               success: function(res2) {
-                wx.request({
-                  url: aqiUrl + '&location=' + longitude + ',' + latitude,
-                  data: {},
-                  // header: {},
-                  method: 'GET',
-                  success: function (res3) {
-                    var result = pareseWeahterData(res1, res2, res3);
-                    callback(true, result);
-                  },
-                  fail: function (res3) { },
-                  complete: function (res3) { },
-                })
+                var result = pareseWeahterData(res1, res2);
+                callback(true, result);
               },
-              fail: function(res2) {},
-              complete: function(res2) {},
+              fail: function(res2) {
+                wx.showToast({
+                  title: '获取天气失败！'
+                });
+                callback(false);
+              }
             })
         },
-        fail: function (res) {
+        fail: function (res1) {
             // fail
+            wx.showToast({
+              title: '获取天气失败！'
+            });
             callback(false);
         }
     });
@@ -61,21 +58,20 @@ function requestWeatherData(callback) {
 /**
  * 解析数据
  */
-function pareseWeahterData(orign, after, aqi) {
+function pareseWeahterData(orign, after) {
     var weather = {};
     console.log(orign);
     console.log(after);
-    console.log(aqi);
     var data = orign.data.HeWeather5[0];
     var citydata = after.data.HeWeather6[0];
-    var aqidata = aqi.data.HeWeather6[0];
+    // var aqidata = aqi.data.HeWeather6[0];
     weather.city = citydata.basic;
     weather.now = data.now;
     weather.daily = data.daily_forecast;
     weather.suggestion = data.suggestion;
     weather.basic = data.basic;
     weather.update = data.basic.update.loc.substring(10, 16);
-    weather.aqi = aqidata.air_now_city;
+    weather.aqi = data.aqi.city;
     console.log(weather);
     return weather;
 }
