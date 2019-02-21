@@ -217,6 +217,7 @@
       <view class="item-date">{{item.tmp.max}}℃</view>
     </view>
   </view>
+  <ad unit-id="adunit-b9e32bb2bd33b3f8"></ad>
   <view class="life-suggestion">
     <text>空气指数:{{weather.suggestion.air.brf}},{{weather.suggestion.air.txt}}</text>
     <text>舒适度指数:{{weather.suggestion.comf.brf}},{{weather.suggestion.comf.txt}}</text>
