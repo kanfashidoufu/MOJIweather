@@ -48,8 +48,8 @@ function requestWeatherByLocation(latitude, longitude, callback) {
 function requestWeatherData(callback) {
     requestLocation((success, latitude, longitude) => {
         if (success == false) {
-            latitude = 120.343;
-            longitude = 36.088;
+            latitude = 120.13026;
+            longitude = 30.25961;
         }
         requestWeatherByLocation(latitude, longitude, callback);
     });
