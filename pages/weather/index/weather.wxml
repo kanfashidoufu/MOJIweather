@@ -1,231 +1,149 @@
-<view class="container">
-  <!-- <image class='imageClass' src="https://picsum.photos/400/800/"></image> -->
-  <view class="header">
-    <view class="header-top">
-      <view id="city">{{weather.city.admin_area}}-{{weather.city.parent_city}}-{{weather.city.location}}</view>
-      <view>最后更新时间:{{weather.update}}</view>
+<view class='cu-custom' style="height:{{CustomBar}}px;">
+  <view class="cu-bar fixed bg-gradual-blue" style="height:{{CustomBar}}px;padding-top:{{StatusBar}}px;">
+    <view class='content' style='top:{{StatusBar}}px;'>MOJI天气</view>
+  </view>
+</view>
+<view class="bg-white">
+    <view class="flex justify-between">
+      <view class='bg-white padding-sm margin-xs radius'>{{weather.city.admin_area}}-{{weather.city.parent_city}}-{{weather.city.location}}</view>
+      <view class='bg-white padding-sm margin-xs radius'>最后更新时间:{{weather.update}}</view>
     </view>
-    <view class="header-condition">
-      <view id="temp">{{weather.now.tmp}}℃</view>
-      <view class='weatherText'>{{weather.now.cond.txt}}</view>
-      <!-- 天气图标判断 -->
-      <view class='weatherIcon' wx:if="{{weather.now.cond.code == '100'}}">
-        <image class='PicSize'  src="https://cdn.heweather.com/cond_icon/100.png"></image>
+    <view class="flex justify-center">
+      <view class='bg-white text-xsl radius'>{{weather.now.tmp}}℃</view>
+    </view>
+    <view class="flex justify-center">  
+      <image class='png'  src="{{contMap[weather.now.cond.code]}}" style='width: 60rpx;height: 60rpx;margin-top: 12rpx;'></image>
+      <view class='bg-white padding-sm text-lg radius'>{{weather.now.cond.txt}}</view>
+    </view>
+    <view class="cu-list grid col-4 no-border">
+      <view class="cu-item">
+        <image src='/resources/sunrise.svg'></image>
+        <text>日出时间</text>
+        <text>{{weather.daily[0].astro.sr}}</text>
       </view>
-      <view class='weatherIcon' wx:if="{{weather.now.cond.code == '101'}}">
-        <image class='PicSize' src="https://cdn.heweather.com/cond_icon/101.png"></image>
+      <view class="cu-item">
+        <image src='/resources/sunset.svg'></image>
+        <text>日落时间</text>
+        <text>{{weather.daily[0].astro.ss}}</text>
       </view>
-      <view class='weatherIcon' wx:if="{{weather.now.cond.code == '102'}}">
-        <image class='PicSize'  src="https://cdn.heweather.com/cond_icon/102.png"></image>
+      <view class="cu-item">
+        <image src='/resources/pres.svg'></image>
+        <text>大气压强</text>
+        <text>{{weather.now.pres}}hpa</text>
       </view>
-      <view class='weatherIcon' wx:if="{{weather.now.cond.code == '103'}}">
-        <image class='PicSize'  src="https://cdn.heweather.com/cond_icon/103.png"></image>
+      <view class="cu-item">
+        <image src='/resources/windspeed.svg'></image>
+        <text>风向风速</text>
+        <text>{{weather.now.wind.dir}}{{weather.now.wind.sc}}级</text>
       </view>
-      <view class='weatherIcon' wx:if="{{weather.now.cond.code == '104'}}">
-        <image class='PicSize'  src="https://cdn.heweather.com/cond_icon/104.png"></image>
+    </view>
+    <view class="cu-list grid col-5 no-border">
+      <view class="cu-item">
+        <text style='font-size:30rpx;font-weight:bold;'>空气质量</text>
+        <text class='{{qltyMap[weather.aqi.qlty]}} round' style='color: #fff'>{{weather.aqi.qlty}}</text>
       </view>
-      <view class='weatherIcon' wx:if="{{weather.now.cond.code == '200'}}">
-        <image class='PicSize'  src="https://cdn.heweather.com/cond_icon/200.png"></image>
+      <view class="cu-item">
+        <text style='font-size:30rpx;font-weight:bold;'>AQI</text>
+        <text>{{weather.aqi.aqi}}</text>
       </view>
-      <view class='weatherIcon' wx:if="{{weather.now.cond.code == '201'}}">
-        <image class='PicSize'  src="https://cdn.heweather.com/cond_icon/201.png"></image>
+      <view class="cu-item">
+        <text style='font-size:30rpx;font-weight:bold;'>PM2.5</text>
+        <text>{{weather.aqi.pm25}}</text>
       </view>
-      <view class='weatherIcon' wx:if="{{weather.now.cond.code == '202'}}">
-        <image class='PicSize'  src="https://cdn.heweather.com/cond_icon/202.png"></image>
+      <view class="cu-item">
+        <text style='font-size:30rpx;font-weight:bold;'>PM10</text>
+        <text>{{weather.aqi.pm10}}</text>
       </view>
-      <view class='weatherIcon' wx:if="{{weather.now.cond.code == '203'}}">
-        <image class='PicSize' src="https://cdn.heweather.com/cond_icon/203.png"></image>
+      <view class="cu-item">
+        <text style='font-size:30rpx;font-weight:bold;'>湿度</text>
+        <text>{{weather.now.hum}}%</text>
       </view>
-      <view class='weatherIcon' wx:if="{{weather.now.cond.code == '204'}}">
-        <image class='PicSize' src="https://cdn.heweather.com/cond_icon/204.png"></image>
+    </view>
+    <view class="cu-list grid col-4 no-border">
+      <view class="cu-item">
+        <text style='font-size:30rpx;font-weight:bold;'>日期</text>
       </view>
-      <view class='weatherIcon' wx:if="{{weather.now.cond.code == '205'}}">
-        <image class='PicSize' src="https://cdn.heweather.com/cond_icon/205.png"></image>
+      <view class="cu-item">
+        <text style='font-size:30rpx;font-weight:bold;'>天气</text>
       </view>
-      <view class='weatherIcon' wx:if="{{weather.now.cond.code == '206'}}">
-        <image class='PicSize' src="https://cdn.heweather.com/cond_icon/206.png"></image>
+      <view class="cu-item">
+        <text style='font-size:30rpx;font-weight:bold;'>最低气温</text>
       </view>
-      <view class='weatherIcon' wx:if="{{weather.now.cond.code == '207'}}">
-        <image class='PicSize' src="https://cdn.heweather.com/cond_icon/207.png"></image>
+      <view class="cu-item">
+        <text style='font-size:30rpx;font-weight:bold;'>最高气温</text>
       </view>
-      <view class='weatherIcon' wx:if="{{weather.now.cond.code == '208'}}">
-        <image class='PicSize' src="https://cdn.heweather.com/cond_icon/208.png"></image>
+    </view>
+    <view class="cu-list grid col-4 no-border" wx:for="{{weather.daily}}" style='margin:0;padding-top:0;'>
+      <view class="cu-item">
+        <text>{{item.date}}</text>
       </view>
-      <view class='weatherIcon' wx:if="{{weather.now.cond.code == '209'}}">
-        <image class='PicSize' src="https://cdn.heweather.com/cond_icon/209.png"></image>
+      <view class="cu-item">
+        <text>{{item.cond.txt_d}}~{{item.cond.txt_n}}</text>
       </view>
-      <view class='weatherIcon' wx:if="{{weather.now.cond.code == '210'}}">
-        <image class='PicSize' src="https://cdn.heweather.com/cond_icon/210.png"></image>
+      <view class="cu-item">
+        <text>{{item.tmp.min}}℃</text>
       </view>
-      <view class='weatherIcon' wx:if="{{weather.now.cond.code == '211'}}">
-        <image class='PicSize' src="https://cdn.heweather.com/cond_icon/211.png"></image>
+      <view class="cu-item">
+        <text>{{item.tmp.max}}℃</text>
       </view>
-      <view class='weatherIcon' wx:if="{{weather.now.cond.code == '212'}}">
-        <image class='PicSize' src="https://cdn.heweather.com/cond_icon/212.png"></image>
+    </view>
+    <ad unit-id="adunit-b9e32bb2bd33b3f8"></ad>
+    <view class="flex solid-bottom justify-start">
+      <view class='bg-white padding-xs text-df text-bold'>生活指数</view>
+    </view>
+    <view class="cu-list grid col-4">
+      <view class="cu-item" bindtap="showModal" data-target="Modal" data-content="{{weather.suggestion.air.txt}}">
+        <image src='/resources/airCondition.svg'></image>
+        <text>空气指数</text>
+        <text>{{weather.suggestion.air.brf}}</text>
       </view>
-      <view class='weatherIcon' wx:if="{{weather.now.cond.code == '213'}}">
-        <image class='PicSize' src="https://cdn.heweather.com/cond_icon/213.png"></image>
+      <view class="cu-item" bindtap="showModal" data-target="Modal" data-content="{{weather.suggestion.comf.txt}}">
+        <image src='/resources/comf.svg'></image>
+        <text>舒适指数</text>
+        <text>{{weather.suggestion.comf.brf}}</text>
       </view>
-      <view class='weatherIcon' wx:if="{{weather.now.cond.code == '300'}}">
-        <image class='PicSize' src="https://cdn.heweather.com/cond_icon/300.png"></image>
+      <view class="cu-item" bindtap="showModal" data-target="Modal" data-content="{{weather.suggestion.cw.txt}}">
+        <image src='/resources/cw.svg'></image>
+        <text>洗车指数</text>
+        <text>{{weather.suggestion.cw.brf}}</text>
       </view>
-      <view class='weatherIcon' wx:if="{{weather.now.cond.code == '301'}}">
-        <image class='PicSize' src="https://cdn.heweather.com/cond_icon/301.png"></image>
+      <view class="cu-item" bindtap="showModal" data-target="Modal" data-content="{{weather.suggestion.drsg.txt}}">
+        <image src='/resources/drsg.svg'></image>
+        <text>穿衣指数</text>
+        <text>{{weather.suggestion.drsg.brf}}</text>
       </view>
-      <view class='weatherIcon' wx:if="{{weather.now.cond.code == '302'}}">
-        <image class='PicSize' src="https://cdn.heweather.com/cond_icon/302.png"></image>
+      <view class="cu-item" bindtap="showModal" data-target="Modal" data-content="{{weather.suggestion.flu.txt}}">
+        <image src='/resources/flu.svg'></image>
+        <text>感冒指数</text>
+        <text>{{weather.suggestion.flu.brf}}</text>
       </view>
-      <view class='weatherIcon' wx:if="{{weather.now.cond.code == '303'}}">
-        <image class='PicSize' src="https://cdn.heweather.com/cond_icon/303.png"></image>
+      <view class="cu-item" bindtap="showModal" data-target="Modal" data-content="{{weather.suggestion.sport.txt}}">
+        <image src='/resources/sport.svg'></image>
+        <text>运动指数</text>
+        <text>{{weather.suggestion.sport.brf}}</text>
       </view>
-      <view class='weatherIcon' wx:if="{{weather.now.cond.code == '304'}}">
-        <image class='PicSize' src="https://cdn.heweather.com/cond_icon/304.png"></image>
+      <view class="cu-item" bindtap="showModal" data-target="Modal" data-content="{{weather.suggestion.trav.txt}}">
+        <image src='/resources/trav.svg'></image>
+        <text>旅行指数</text>
+        <text>{{weather.suggestion.trav.brf}}</text>
       </view>
-      <view class='weatherIcon' wx:if="{{weather.now.cond.code == '305'}}">
-        <image class='PicSize' src="https://cdn.heweather.com/cond_icon/305.png"></image>
-      </view>
-      <view class='weatherIcon' wx:if="{{weather.now.cond.code == '306'}}">
-        <image class='PicSize' src="https://cdn.heweather.com/cond_icon/306.png"></image>
-      </view>
-      <view class='weatherIcon' wx:if="{{weather.now.cond.code == '307'}}">
-        <image class='PicSize' src="https://cdn.heweather.com/cond_icon/307.png"></image>
-      </view>
-      <view class='weatherIcon' wx:if="{{weather.now.cond.code == '308'}}">
-        <image class='PicSize' src="https://cdn.heweather.com/cond_icon/308.png"></image>
-      </view>
-      <view class='weatherIcon' wx:if="{{weather.now.cond.code == '309'}}">
-        <image class='PicSize' src="https://cdn.heweather.com/cond_icon/309.png"></image>
-      </view>
-      <view class='weatherIcon' wx:if="{{weather.now.cond.code == '310'}}">
-        <image class='PicSize' src="https://cdn.heweather.com/cond_icon/310.png"></image>
-      </view>
-      <view class='weatherIcon' wx:if="{{weather.now.cond.code == '311'}}">
-        <image class='PicSize' src="https://cdn.heweather.com/cond_icon/311.png"></image>
-      </view>
-      <view class='weatherIcon' wx:if="{{weather.now.cond.code == '312'}}">
-        <image class='PicSize' src="https://cdn.heweather.com/cond_icon/312.png"></image>
-      </view>
-      <view class='weatherIcon' wx:if="{{weather.now.cond.code == '313'}}">
-        <image class='PicSize' src="https://cdn.heweather.com/cond_icon/313.png"></image>
-      </view>
-      <view class='weatherIcon' wx:if="{{weather.now.cond.code == '400'}}">
-        <image class='PicSize' src="https://cdn.heweather.com/cond_icon/400.png"></image>
-      </view>
-      <view class='weatherIcon' wx:if="{{weather.now.cond.code == '401'}}">
-        <image class='PicSize' src="https://cdn.heweather.com/cond_icon/401.png"></image>
-      </view>
-      <view class='weatherIcon' wx:if="{{weather.now.cond.code == '402'}}">
-        <image class='PicSize' src="https://cdn.heweather.com/cond_icon/402.png"></image>
-      </view>
-      <view class='weatherIcon' wx:if="{{weather.now.cond.code == '403'}}">
-        <image class='PicSize' src="https://cdn.heweather.com/cond_icon/403.png"></image>
-      </view>
-      <view class='weatherIcon' wx:if="{{weather.now.cond.code == '404'}}">
-        <image class='PicSize' src="https://cdn.heweather.com/cond_icon/404.png"></image>
-      </view>
-      <view class='weatherIcon' wx:if="{{weather.now.cond.code == '405'}}">
-        <image class='PicSize' src="https://cdn.heweather.com/cond_icon/405.png"></image>
-      </view>
-      <view class='weatherIcon' wx:if="{{weather.now.cond.code == '406'}}">
-        <image class='PicSize' src="https://cdn.heweather.com/cond_icon/406.png"></image>
-      </view>
-      <view class='weatherIcon' wx:if="{{weather.now.cond.code == '407'}}">
-        <image class='PicSize' src="https://cdn.heweather.com/cond_icon/407.png"></image>
-      </view>
-      <view class='weatherIcon' wx:if="{{weather.now.cond.code == '500'}}">
-        <image class='PicSize' src="https://cdn.heweather.com/cond_icon/500.png"></image>
-      </view>
-      <view class='weatherIcon' wx:if="{{weather.now.cond.code == '501'}}">
-        <image class='PicSize' src="https://cdn.heweather.com/cond_icon/501.png"></image>
-      </view>
-      <view class='weatherIcon' wx:if="{{weather.now.cond.code == '502'}}">
-        <image class='PicSize' src="https://cdn.heweather.com/cond_icon/502.png"></image>
-      </view>
-      <view class='weatherIcon' wx:if="{{weather.now.cond.code == '503'}}">
-        <image class='PicSize' src="https://cdn.heweather.com/cond_icon/503.png"></image>
-      </view>
-      <view class='weatherIcon' wx:if="{{weather.now.cond.code == '504'}}">
-        <image class='PicSize' src="https://cdn.heweather.com/cond_icon/504.png"></image>
-      </view>
-      <view class='weatherIcon' wx:if="{{weather.now.cond.code == '505'}}">
-        <image class='PicSize' src="https://cdn.heweather.com/cond_icon/505.png"></image>
-      </view>
-      <view class='weatherIcon' wx:if="{{weather.now.cond.code == '506'}}">
-        <image class='PicSize' src="https://cdn.heweather.com/cond_icon/506.png"></image>
-      </view>
-      <view class='weatherIcon' wx:if="{{weather.now.cond.code == '507'}}">
-        <image class='PicSize' src="https://cdn.heweather.com/cond_icon/507.png"></image>
-      </view>
-      <view class='weatherIcon' wx:if="{{weather.now.cond.code == '508'}}">
-        <image class='PicSize' src="https://cdn.heweather.com/cond_icon/508.png"></image>
+      <view class="cu-item" bindtap="showModal" data-target="Modal" data-content="{{weather.suggestion.uv.txt}}">
+        <image src='/resources/uv.svg'></image>
+        <text>UV指数</text>
+        <text>{{weather.suggestion.uv.brf}}</text>
       </view>
     </view>
   </view>
-  <view class='sunriseComp'>
-    <image class='sunriseImg' src='/resources/sunrise.svg'></image>
-    <view class='sunrise' title='日出时间'>{{weather.daily[0].astro.sr}}</view>
-    <image class='sunriseImg' src='/resources/sunset.svg'></image>
-    <view class='sunrise'>{{weather.daily[0].astro.ss}}</view>
-    <view style='display:flex;margin-left:50rpx;'>
-    <image class='windImage' src='/resources/pres.svg'></image>
-    <view class='sunrise'>{{weather.now.pres}}hpa</view>
-    <image class='windImage' src='/resources/windspeed.svg'></image>
-    <view class='sunrise'>{{weather.now.wind.dir}}{{weather.now.wind.sc}}级</view>
-    </view>
-    
-  </view>
-    <view class="air-list">
-    <view class="air-item">
-      <view>空气质量</view>
-      <view wx:if="{{weather.aqi.qlty=='优'}}" class='qltyY'>{{weather.aqi.qlty}}</view>
-      <view wx:if="{{weather.aqi.qlty=='良'}}" class='qltyL'>{{weather.aqi.qlty}}</view>
-      <view wx:if="{{weather.aqi.qlty=='轻度污染'}}" class='qltyQ'>{{weather.aqi.qlty}}</view>
-      <view wx:if="{{weather.aqi.qlty=='中度污染'}}" class='qltyZ'>{{weather.aqi.qlty}}</view>
-      <view wx:if="{{weather.aqi.qlty=='重度污染'}}" class='qltyZZ'>{{weather.aqi.qlty}}</view>
-      <view wx:if="{{weather.aqi.qlty=='严重污染'}}" class='qltyYZ'>{{weather.aqi.qlty}}</view>
-    </view>
-    <view class="air-item">
-      <view>AQI</view>
-      <view>{{weather.aqi.aqi}}</view>
-    </view>
-    <view class="air-item">
-      <view>PM2.5</view>
-      <view>{{weather.aqi.pm25}}</view>
-    </view>
-    <view class="air-item">
-      <view>PM10</view>
-      <view>{{weather.aqi.pm10}}</view>  
-    </view>
-    <view class="air-item">
-      <view>湿度</view>
-      <view>{{weather.now.hum}}%</view>
-    </view>
-  </view>
-    <view class='item-list'>
-      <view class="daily-item">
-        <view class='item-date'>日期</view>
-        <view class='item-date'>天气</view>
-        <view class='item-date'>低温</view>
-        <view class='item-date'>高温</view>
+  <view class="cu-modal {{modalName=='Modal'?'show':''}}">
+  <view class="cu-dialog">
+    <view class="cu-bar bg-white justify-end">
+      <view class='content'>指数详情</view>
+      <view class='action' bindtap='hideModal'>
+        <text class='icon-close text-red'></text>
       </view>
-    </view> 
-  <view class="item-list" wx:for="{{weather.daily}}">
-    <view class="daily-item">
-      <view class="item-date">{{item.date}}</view>
-      <view class="item-date">{{item.cond.txt_d}}</view>
-      <view class="item-date">{{item.tmp.min}}℃</view>
-      <view class="item-date">{{item.tmp.max}}℃</view>
     </view>
-  </view>
-  <ad unit-id="adunit-b9e32bb2bd33b3f8"></ad>
-  <view class="life-suggestion">
-    <text>空气指数:{{weather.suggestion.air.brf}},{{weather.suggestion.air.txt}}</text>
-    <text>舒适度指数:{{weather.suggestion.comf.brf}},{{weather.suggestion.comf.txt}}</text>
-    <text>洗车指数:{{weather.suggestion.cw.brf}},{{weather.suggestion.cw.txt}}</text>
-    <text>穿衣指数:{{weather.suggestion.drsg.brf}},{{weather.suggestion.drsg.txt}}</text>
-    <text>感冒指数:{{weather.suggestion.flu.brf}},{{weather.suggestion.flu.txt}}</text>
-    <text>运动指数:{{weather.suggestion.sport.brf}},{{weather.suggestion.sport.txt}}</text>
-    <text>旅游指数:{{weather.suggestion.trav.brf}},{{weather.suggestion.trav.txt}}</text>
-    <text>紫外线指数:{{weather.suggestion.uv.brf}},{{weather.suggestion.uv.txt}}</text>
+    <view class='padding-xl'>
+      {{content}}
+    </view>
   </view>
 </view>
