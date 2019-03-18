@@ -7,7 +7,7 @@ Page({
     StatusBar: app.globalData.StatusBar,
     CustomBar: app.globalData.CustomBar,
     motto: '欢迎使用磨叽天气！',
-    version: '1.0',
+    version: '1.1.0',
     userInfo: {},
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo')

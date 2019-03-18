@@ -6,7 +6,13 @@ var app = getApp();
 function refreshData(that) {
   weatherUtil.loadWeatherData((success, data) => {
     for(var i=0;i<data.daily.length;i++) {
-      data.daily[i].date = data.daily[i].date.substring(5,10);
+      if (i == 0) {
+        data.daily[i].date = "今天";
+      } else if (i == 1) {
+        data.daily[i].date = "明天";
+      } else {
+        data.daily[i].date = data.daily[i].date.substring(5, 10);
+      }
     };
     that.setData({
       weather: data
@@ -67,6 +73,12 @@ Page({
       '311': 'https://cdn.heweather.com/cond_icon/311.png',
       '312': 'https://cdn.heweather.com/cond_icon/312.png',
       '313': 'https://cdn.heweather.com/cond_icon/313.png',
+      '314': 'https://cdn.heweather.com/cond_icon/314.png',
+      '315': 'https://cdn.heweather.com/cond_icon/315.png',
+      '316': 'https://cdn.heweather.com/cond_icon/316.png',
+      '317': 'https://cdn.heweather.com/cond_icon/317.png',
+      '318': 'https://cdn.heweather.com/cond_icon/318.png',
+      '399': 'https://cdn.heweather.com/cond_icon/399.png',
       '400': 'https://cdn.heweather.com/cond_icon/400.png',
       '401': 'https://cdn.heweather.com/cond_icon/401.png',
       '402': 'https://cdn.heweather.com/cond_icon/402.png',
@@ -75,6 +87,10 @@ Page({
       '405': 'https://cdn.heweather.com/cond_icon/405.png',
       '406': 'https://cdn.heweather.com/cond_icon/406.png',
       '407': 'https://cdn.heweather.com/cond_icon/407.png',
+      '408': 'https://cdn.heweather.com/cond_icon/408.png',
+      '409': 'https://cdn.heweather.com/cond_icon/409.png',
+      '410': 'https://cdn.heweather.com/cond_icon/410.png',
+      '499': 'https://cdn.heweather.com/cond_icon/499.png',
       '500': 'https://cdn.heweather.com/cond_icon/500.png',
       '501': 'https://cdn.heweather.com/cond_icon/501.png',
       '502': 'https://cdn.heweather.com/cond_icon/502.png',
@@ -83,7 +99,14 @@ Page({
       '505': 'https://cdn.heweather.com/cond_icon/505.png',
       '506': 'https://cdn.heweather.com/cond_icon/506.png',
       '507': 'https://cdn.heweather.com/cond_icon/507.png',
-      '508': 'https://cdn.heweather.com/cond_icon/508.png'
+      '508': 'https://cdn.heweather.com/cond_icon/508.png',
+      '509': 'https://cdn.heweather.com/cond_icon/509.png',
+      '510': 'https://cdn.heweather.com/cond_icon/510.png',
+      '511': 'https://cdn.heweather.com/cond_icon/511.png',
+      '512': 'https://cdn.heweather.com/cond_icon/512.png',
+      '513': 'https://cdn.heweather.com/cond_icon/513.png',
+      '514': 'https://cdn.heweather.com/cond_icon/514.png',
+      '515': 'https://cdn.heweather.com/cond_icon/515.png'
     }
   },
 

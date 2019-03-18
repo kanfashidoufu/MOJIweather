@@ -1,6 +1,6 @@
 const baseUrl = 'https://free-api.heweather.com/v5/weather?key=19713447578c4afe8c12a351d46ea922';
-const baseUrlNew = 'https://free-api.heweather.com/s6/weather?key=ae4216a1cfa74036b018e1c8bb7f5952';
-const aqiUrl = 'https://free-api.heweather.com/s6/air?key=ae4216a1cfa74036b018e1c8bb7f5952';
+const baseUrlNew = 'https://free-api.heweather.com/s6/weather?key=f7cb07c2c574454b86280fc7931de6c5';
+const aqiUrl = 'https://free-api.heweather.com/s6/air?key=f7cb07c2c574454b86280fc7931de6c5';
 const app = getApp();
 
 /**
@@ -8,7 +8,7 @@ const app = getApp();
  */
 function requestWeatherByLocation(latitude, longitude, callback) {
     wx.request({
-        url: baseUrl + '&city=' + longitude + ',' + latitude,
+      url: aqiUrl + '&location=auto_ip',
         data: {},
         method: 'GET', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
         // header: {}, // 设置请求的 header
@@ -62,16 +62,16 @@ function pareseWeahterData(orign, after) {
     var weather = {};
     console.log(orign);
     console.log(after);
-    var data = orign.data.HeWeather5[0];
+    var data = orign.data.HeWeather6[0];
     var citydata = after.data.HeWeather6[0];
     // var aqidata = aqi.data.HeWeather6[0];
     weather.city = citydata.basic;
-    weather.now = data.now;
-    weather.daily = data.daily_forecast;
-    weather.suggestion = data.suggestion;
-    weather.basic = data.basic;
-    weather.update = data.basic.update.loc.substring(10, 16);
-    weather.aqi = data.aqi.city;
+    weather.now = citydata.now;
+    weather.daily = citydata.daily_forecast;
+    weather.suggestion = citydata.lifestyle;
+    // weather.basic = citydata.basic;
+    weather.update = citydata.update.loc.substring(10, 16);
+    weather.aqi = data.air_now_city;
     console.log(weather);
     return weather;
 }

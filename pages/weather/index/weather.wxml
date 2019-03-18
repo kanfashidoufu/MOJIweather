@@ -3,28 +3,28 @@
     <view class='content' style='top:{{StatusBar}}px;'>MOJI天气</view>
   </view>
 </view>
-<view class="bg-white">
+<view class="bg-white custom">
     <view class="flex justify-between">
-      <view class='bg-white padding-sm margin-xs radius'>{{weather.city.admin_area}}-{{weather.city.parent_city}}-{{weather.city.location}}</view>
-      <view class='bg-white padding-sm margin-xs radius'>最后更新时间:{{weather.update}}</view>
+      <view class='padding-sm margin-xs radius'>{{weather.city.admin_area}}-{{weather.city.parent_city}}-{{weather.city.location}}</view>
+      <view class='padding-sm margin-xs radius'>最后更新时间:{{weather.update}}</view>
     </view>
     <view class="flex justify-center">
-      <view class='bg-white text-xsl radius'>{{weather.now.tmp}}℃</view>
+      <view class='text-xsl radius'>{{weather.now.tmp}}℃</view>
     </view>
     <view class="flex justify-center">  
-      <image class='png'  src="{{contMap[weather.now.cond.code]}}" style='width: 60rpx;height: 60rpx;margin-top: 12rpx;'></image>
-      <view class='bg-white padding-sm text-lg radius'>{{weather.now.cond.txt}}</view>
+      <image class='png'  src="{{contMap[weather.now.cond_code]}}" style='width: 60rpx;height: 60rpx;margin-top: 12rpx;'></image>
+      <view class='padding-sm text-lg radius'>{{weather.now.cond_txt}}</view>
     </view>
     <view class="cu-list grid col-4 no-border">
       <view class="cu-item">
         <image src='/resources/sunrise.svg'></image>
         <text>日出时间</text>
-        <text>{{weather.daily[0].astro.sr}}</text>
+        <text>{{weather.daily[0].sr}}</text>
       </view>
       <view class="cu-item">
         <image src='/resources/sunset.svg'></image>
         <text>日落时间</text>
-        <text>{{weather.daily[0].astro.ss}}</text>
+        <text>{{weather.daily[0].ss}}</text>
       </view>
       <view class="cu-item">
         <image src='/resources/pres.svg'></image>
@@ -34,7 +34,7 @@
       <view class="cu-item">
         <image src='/resources/windspeed.svg'></image>
         <text>风向风速</text>
-        <text>{{weather.now.wind.dir}}{{weather.now.wind.sc}}级</text>
+        <text>{{weather.now.wind_dir}}{{weather.now.wind_sc}}级</text>
       </view>
     </view>
     <view class="cu-list grid col-5 no-border">
@@ -59,6 +59,9 @@
         <text>{{weather.now.hum}}%</text>
       </view>
     </view>
+    <view class="flex solid-bottom justify-start">
+      <view class='padding-xs text-df text-bold'>七天预报</view>
+    </view>
     <view class="cu-list grid col-4 no-border">
       <view class="cu-item">
         <text style='font-size:30rpx;font-weight:bold;'>日期</text>
@@ -77,60 +80,62 @@
       <view class="cu-item">
         <text>{{item.date}}</text>
       </view>
-      <view class="cu-item">
-        <text>{{item.cond.txt_d}}~{{item.cond.txt_n}}</text>
+      <view class="cu-item" style='display: inline;'>
+        
+        <image class='png'  src="{{contMap[item.cond_code_d]}}" style='width: 45rpx;height: 45rpx;display: inline-block;margin:0;'></image><view style='display: inline-block;'>~</view><image class='png'  src="{{contMap[item.cond_code_n]}}" style='width: 45rpx;height: 45rpx;display: inline-block;margin:0;'></image>
+        <text>{{item.cond_txt_d}}~{{item.cond_txt_n}}</text>
       </view>
       <view class="cu-item">
-        <text>{{item.tmp.min}}℃</text>
+        <text>{{item.tmp_min}}℃</text>
       </view>
       <view class="cu-item">
-        <text>{{item.tmp.max}}℃</text>
+        <text>{{item.tmp_max}}℃</text>
       </view>
     </view>
     <ad unit-id="adunit-b9e32bb2bd33b3f8"></ad>
     <view class="flex solid-bottom justify-start">
-      <view class='bg-white padding-xs text-df text-bold'>生活指数</view>
+      <view class='padding-xs text-df text-bold'>生活指数</view>
     </view>
     <view class="cu-list grid col-4">
-      <view class="cu-item" bindtap="showModal" data-target="Modal" data-content="{{weather.suggestion.air.txt}}">
+      <view class="cu-item" bindtap="showModal" data-target="Modal" data-content="{{weather.suggestion[7].txt}}">
         <image src='/resources/airCondition.svg'></image>
         <text>空气指数</text>
-        <text>{{weather.suggestion.air.brf}}</text>
+        <text>{{weather.suggestion[7].brf}}</text>
       </view>
-      <view class="cu-item" bindtap="showModal" data-target="Modal" data-content="{{weather.suggestion.comf.txt}}">
+      <view class="cu-item" bindtap="showModal" data-target="Modal" data-content="{{weather.suggestion[0].txt}}">
         <image src='/resources/comf.svg'></image>
         <text>舒适指数</text>
-        <text>{{weather.suggestion.comf.brf}}</text>
+        <text>{{weather.suggestion[0].brf}}</text>
       </view>
-      <view class="cu-item" bindtap="showModal" data-target="Modal" data-content="{{weather.suggestion.cw.txt}}">
+      <view class="cu-item" bindtap="showModal" data-target="Modal" data-content="{{weather.suggestion[6].txt}}">
         <image src='/resources/cw.svg'></image>
         <text>洗车指数</text>
-        <text>{{weather.suggestion.cw.brf}}</text>
+        <text>{{weather.suggestion[6].brf}}</text>
       </view>
-      <view class="cu-item" bindtap="showModal" data-target="Modal" data-content="{{weather.suggestion.drsg.txt}}">
+      <view class="cu-item" bindtap="showModal" data-target="Modal" data-content="{{weather.suggestion[1].txt}}">
         <image src='/resources/drsg.svg'></image>
         <text>穿衣指数</text>
-        <text>{{weather.suggestion.drsg.brf}}</text>
+        <text>{{weather.suggestion[1].brf}}</text>
       </view>
-      <view class="cu-item" bindtap="showModal" data-target="Modal" data-content="{{weather.suggestion.flu.txt}}">
+      <view class="cu-item" bindtap="showModal" data-target="Modal" data-content="{{weather.suggestion[2].txt}}">
         <image src='/resources/flu.svg'></image>
         <text>感冒指数</text>
-        <text>{{weather.suggestion.flu.brf}}</text>
+        <text>{{weather.suggestion[2].brf}}</text>
       </view>
-      <view class="cu-item" bindtap="showModal" data-target="Modal" data-content="{{weather.suggestion.sport.txt}}">
+      <view class="cu-item" bindtap="showModal" data-target="Modal" data-content="{{weather.suggestion[3].txt}}">
         <image src='/resources/sport.svg'></image>
         <text>运动指数</text>
-        <text>{{weather.suggestion.sport.brf}}</text>
+        <text>{{weather.suggestion[3].brf}}</text>
       </view>
-      <view class="cu-item" bindtap="showModal" data-target="Modal" data-content="{{weather.suggestion.trav.txt}}">
+      <view class="cu-item" bindtap="showModal" data-target="Modal" data-content="{{weather.suggestion[4].txt}}">
         <image src='/resources/trav.svg'></image>
         <text>旅行指数</text>
-        <text>{{weather.suggestion.trav.brf}}</text>
+        <text>{{weather.suggestion[4].brf}}</text>
       </view>
-      <view class="cu-item" bindtap="showModal" data-target="Modal" data-content="{{weather.suggestion.uv.txt}}">
+      <view class="cu-item" bindtap="showModal" data-target="Modal" data-content="{{weather.suggestion[5].txt}}">
         <image src='/resources/uv.svg'></image>
         <text>UV指数</text>
-        <text>{{weather.suggestion.uv.brf}}</text>
+        <text>{{weather.suggestion[5].brf}}</text>
       </view>
     </view>
   </view>
